@@ -1,5 +1,5 @@
 const doctorRouter = require('express').Router()
-import { login,register,logout ,addPatient} from '../controllers/doctor.controller';
+import { login,register,logout ,addPatient, addRecord} from '../controllers/doctor.controller';
 
 doctorRouter.post("/register",register)
 doctorRouter.post("/login",login)

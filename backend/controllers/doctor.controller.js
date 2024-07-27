@@ -1,7 +1,13 @@
-import bcrypt from "bcrypt"
-import Doctor from "../models/Doctor.js"
-import Patient from "../models/Patient.js"
-import jwt from "jsonwebtoken"
+// import bcrypt from "bcrypt"
+// import Doctor from "../models/Doctor.js"
+// import Patient from "../models/Patient.js"
+// import jwt from "jsonwebtoken"
+
+const bcrypt = require("bcrypt");
+const Doctor = require("../models/Doctor.js");
+const Patient = require("../models/Patient.js");
+const jwt = require("jsonwebtoken");
+
 
 export const register = async (req,res) =>{
     //ops
@@ -68,8 +74,9 @@ export const logout = (req,res) =>{
 export const addPatient = async (req,res) => {
     try{
         const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
+        const {doctorId} = res.cookie;
         const patient = await Patient.findOne({govtId:govtId});
-        if (user){
+        if (patient){
             res.status(401).json({"message" : "Patient already exists"})
         }
 
@@ -86,9 +93,18 @@ export const addPatient = async (req,res) => {
 
         // Save the patient and create a corresponding record
         const savedPatient = await newPatient.save();
+
+        const doctor = await Doctor.findById(doctorId);
+        if (!doctor) {
+            throw new Error('Doctor not found');
+        }
+        doctor.patients.push(newPatient._id);
+        await doctor.save();
+
         res.status(201).json({message: "Patient successfully created!"});
     }
     catch(err){
         res.status(500).json({error:err.message});
     }
 }
+
