@@ -1,13 +1,17 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose";
 
 const recordsSchema = mongoose.Schema({
     date:{
         type: Date,
         required:true
     },
+    patientId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Patient"
+    },
     docID:{
-        type: String,
-        required:true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctor"
     },
     comments:{
         type: String,
