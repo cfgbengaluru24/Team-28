@@ -3,13 +3,13 @@ import Doctor from "../models/Doctor.js"
 import Patient from "../models/Patient.js"
 import jwt from "jsonwebtoken"
 import Records from "../models/Records.js";
-import Patient  from "./models/Patient.js";
+
 
 
 export const register = async (req,res) =>{
     //ops
     try{
-        const {name, email, password, isVolunteer, contact, speciality} = req.body;
+        const {name, email, password, contact, speciality} = req.body;
         if(!name || !email || !password ||!contact || !speciality) {
             res.status(400);
             throw new Error("PLease Enter all the Fields");
