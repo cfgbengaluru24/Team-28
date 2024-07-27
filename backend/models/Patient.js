@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Records = require("./Records.js")
+import mongoose from "mongoose";
+import {Records} from "./Records.js"
 
 const PatientSchema = mongoose.Schema({
     name:{
@@ -34,10 +34,10 @@ const PatientSchema = mongoose.Schema({
     contact:{
         type:Number
     },
-    records:{
-        type: [Records],
-        default : [] 
-    }
+    records:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Record" 
+    }],
 })
 
 const Patient = mongoose.model("Patient",PatientSchema);
