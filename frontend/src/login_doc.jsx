@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import axios from "axios"; // Import axios
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Handle login button click
   const handleLoginClick = async () => {
@@ -23,7 +23,7 @@ const Login = () => {
       if (response.status === 200) {
         alert("Login successful");
         // Handle successful login (e.g., redirect or store token)
-        history.push("/Profile");
+        navigate("/Profile");
       }
     } catch (error) {
       // Check if error.response exists
