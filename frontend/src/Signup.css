@@ -1,0 +1,79 @@
+body {
+  background-image: url('./images/bg.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.6); /* Slightly darker for better contrast */
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 700px; /* Increased max-width for a wider form */
+  box-sizing: border-box; /* Ensure padding is included in width */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.signup-logo {
+  max-width: 70%; /* Scale logo with container width */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto 10px auto;
+  margin-bottom : 10px;
+  display: block; /* Ensure logo is a block element */
+}
+
+.signup-form {
+  width: 70%;
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between form fields */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px; /* Space between label and input */
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"] {
+  width: 100%;
+  padding: 12px; /* Increased padding for a more spacious feel */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 10px; /* Adjusted space for checkbox */
+}
+
+.signup-button {
+  width: 100%;
+  padding: 12px; /* Increased padding for a more comfortable button */
+  border: none;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #45a049;
+}

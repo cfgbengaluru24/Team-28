@@ -79,8 +79,9 @@ export const logout = (req,res) =>{
 export const addPatient = async (req,res) => {
     try{
         const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
+        const {doctorId} = res.cookie;
         const patient = await Patient.findOne({govtId:govtId});
-        if (user){
+        if (patient){
             res.status(401).json({"message" : "Patient already exists"})
         }
 
@@ -97,6 +98,14 @@ export const addPatient = async (req,res) => {
 
         // Save the patient and create a corresponding record
         const savedPatient = await newPatient.save();
+
+        const doctor = await Doctor.findById(doctorId);
+        if (!doctor) {
+            throw new Error('Doctor not found');
+        }
+        doctor.patients.push(newPatient._id);
+        await doctor.save();
+
         res.status(201).json({message: "Patient successfully created!"});
     }
     catch(err){
@@ -160,3 +169,5 @@ export const findPatientByLocation = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+
