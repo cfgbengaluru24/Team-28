@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt"
 import Doctor from "../models/Doctor.js"
+import Patient from "../models/Patient.js"
 import jwt from "jsonwebtoken"
 
 export const register = async (req,res) =>{
@@ -17,7 +18,7 @@ export const register = async (req,res) =>{
 
     }
     catch(err){
-        res.status(500).json({error:"Email/username already exists"});
+        res.status(500).json({error:"Incorrect email/password"});
     }
 }
 
@@ -62,4 +63,32 @@ export const login = async (req,res) =>{
 export const logout = (req,res) =>{
     //ops
     res.clearCookie("token").status(200).json({message: "Logout Successful"})
+}
+
+export const addPatient = async (req,res) => {
+    try{
+        const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
+        const patient = await Patient.findOne({govtId:govtId});
+        if (user){
+            res.status(401).json({"message" : "Patient already exists"})
+        }
+
+        // Create a new patient
+        const newPatient = new Patient({
+            name,
+            govtId,
+            DoB,
+            gender,
+            blood_group,
+            location,
+            contact
+        });
+
+        // Save the patient and create a corresponding record
+        const savedPatient = await newPatient.save();
+        res.status(201).json({message: "Patient successfully created!"});
+    }
+    catch(err){
+        res.status(500).json({error:err.message});
+    }
 }
