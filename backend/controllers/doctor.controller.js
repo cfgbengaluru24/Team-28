@@ -2,6 +2,8 @@ import bcrypt from "bcrypt"
 import Doctor from "../models/Doctor.js"
 import jwt from "jsonwebtoken"
 import Patient  from "../models/Patient.js";
+import Records from "../models/Records.js"
+
 
 
 export const register = async (req,res) =>{
@@ -76,13 +78,25 @@ export const logout = (req,res) =>{
 
 
 
+export const getDoctorById = async (req, res) => {
+    const id = req.decoded;
+    const doctor = await Doctor.findById(id);
+
+    if (doctor) {
+        res.status(200).json(doctor);
+    } else {
+        res.status(404).message("Not Found");
+    }
+};
+
 export const addPatient = async (req,res) => {
     try{
         const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
-        const id = res.decoded;
+        const id = req.decoded;
+        console.log(id)
         const patient = await Patient.findOne({govtId:govtId});
         if (patient){
-            res.status(401).json({"message" : "Patient already exists"})
+            throw new Error("Patient already exists");
         }
 
         // Create a new patient
@@ -101,7 +115,7 @@ export const addPatient = async (req,res) => {
 
         const doctor = await Doctor.findById(id);
         if (!doctor) {
-            throw new Error('Doctor not found');
+            res.status(500).json({message: "Doctor Not Found!"});
         }
         doctor.patients.push(newPatient._id);
         await doctor.save();
