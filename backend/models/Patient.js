@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import {Records} from "./Records"
 
 const PatientSchema = mongoose.Schema({
     name:{
