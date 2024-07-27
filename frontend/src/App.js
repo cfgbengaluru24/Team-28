@@ -4,7 +4,7 @@ import React from 'react';
 //import './Signup.css';
 //import Signup from './Signup_admin';
 
-import DoctorProfile from '../Profile';
+import DoctorProfile from './DoctorProfile.js';
 
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -34,6 +34,7 @@ function App() {
           <Route path="/PatientDetails" element={<PatientDetails />} />
           <Route path="/healthDetails" element={<HealthDetails />} />
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/myprofile" element={<DoctorProfile/>}/>
         </Routes>
       </div>
     </Router>

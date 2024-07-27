@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Signup.css';
 import logo from './images/logo.png'; // Ensure this path is correct
 import axios from "axios";
+const api = axios.create({withCredentials:true})
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       // Make POST request to the backend
-      const response = await axios.post('http://localhost:8100/api/doctor/register', formData);
+      const response = await api.post('http://localhost:8100/api/doctor/register', formData);
       alert(response.data.message); // Alert on successful registration
       // Optionally redirect or reset form
       setFormData({

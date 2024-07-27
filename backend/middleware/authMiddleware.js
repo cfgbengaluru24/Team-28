@@ -6,6 +6,7 @@ export const protect = async (req, res, next) => {
 
     try { 
       const token = req.cookies.token;
+      console.log(token);
       //Bearer tokenhjfsd
 
       //decodes token id
