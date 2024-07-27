@@ -63,3 +63,43 @@ export const logout = (req,res) =>{
 }
 
 
+export const getHaemoglobinVsWeight = async (filter) => {
+    try {
+        const result = await Records.aggregate([
+            {
+                $project: {
+                    _id: 0,
+                    haemoglobin: 1,
+                    weight: 1
+                }
+            },
+            {
+                $sort: { haemoglobin: 1 } // Sort by haemoglobin value
+            },
+            
+        ]);
+
+        console.log("Haemoglobin vs Weight Data:", result);
+        return result;
+    } catch (error) {
+        throw new Error(err.message);
+    }
+};
+
+export const doctorvsPatients = async (doctorId) => {
+    try {
+        const result = await Records.aggregate([
+            {
+                $group: {
+                    
+                }
+            }
+            
+        ]);
+
+        console.log("Haemoglobin vs Weight Data:", result);
+        return result;
+    } catch (error) {
+        throw new Error(err.message);
+    }
+};
