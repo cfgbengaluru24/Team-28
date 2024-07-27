@@ -45,7 +45,7 @@ const PatientDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('https://your-api-endpoint/patient-details', {
+      const response = await fetch('http://localhost:8100/api/doctor/addPatient', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
