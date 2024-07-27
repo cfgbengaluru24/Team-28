@@ -13,7 +13,7 @@ const {errorHandler, notFound}= require("./middleware/errorMiddleware")
 app.use(bodyParser.json({extended:true}))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors({credentials: true ,origin:'http://localhost:3000'}))
+app.use(cors({credentials: true ,origin:''}))
 
 
 const port = process.env.PORT || 6000;
