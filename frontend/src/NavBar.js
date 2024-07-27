@@ -18,7 +18,6 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <ul>
-        <li><Link to="/Profile">Profile</Link></li>
         <li><Link to="/SearchPage">Search</Link></li>
         <li><Link to="/PatientDetails">Patient Details</Link></li>
         <li><Link to="/healthDetails">Health Details</Link></li>

@@ -192,6 +192,7 @@ export const findPatientByLocation = async (req, res) => {
 
 
 export const addRecord = async (req,res) => {
+    console.log(req.body);
     const {
         date,
         patientId,
@@ -203,8 +204,9 @@ export const addRecord = async (req,res) => {
         weight,
         height,
         bp
-    } = req.body;
+    } = req.body.formData;
     const docId = req.decoded;
+    console.log(docId);
 
     try {
         const newRecord = new Records({

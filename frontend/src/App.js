@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import './App.css';
 import SearchPage from './SearchPage';
 import PatientDetails from './PatientDetails';
-import Profile from './Profile';
 import HealthDetails from './HealthDetails';
 import Home from './home.jsx';
 import LoginAdmin from './login_admin.jsx';
@@ -30,8 +29,7 @@ function App() {
           <Route path="/login_doc" element={<LoginDoc />} />
           <Route path="/Signup_doc" element={<SignupDoc />} />
           <Route path="/Signup_admin" element={<SignupAdmin />} />
-          <Route path="/profile" element={<><Navbar /><Profile /></>} />
-          <Route path="/search" element={<><Navbar /><SearchPage /></>} />
+          <Route path="/SearchPage" element={<><Navbar /><SearchPage /></>} />
           <Route path="/PatientDetails" element={<><Navbar /><PatientDetails /></>} />
           <Route path="/healthDetails" element={<><Navbar /><HealthDetails /></>} />
           <Route path="*" element={<Navigate to="/" />} />

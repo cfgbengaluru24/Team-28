@@ -19,14 +19,16 @@ const HealthDetailsPage = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [pic, setPic] = useState(false); // To handle loading state of image upload
   const [picLoading, setPicLoading] = useState(false); // To handle loading state of image upload
+
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!/^\d{12}$/.test(formData.govtId)) {
-      newErrors.govtId = 'Govt ID must be a 12-digit numeric value.';
-    }
+    // if (!/^\d{12}$/.test(formData.govtId)) {
+    //   newErrors.govtId = 'Govt ID must be a 12-digit numeric value.';
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -52,9 +54,10 @@ const HealthDetailsPage = () => {
           });
 
           const result = await res.json();
+          setPic(data.url.toString())
           setFormData({
             ...formData,
-            [name]: result.url // Set the URL of the uploaded image
+            [name]: result.url.toString() // Set the URL of the uploaded image
           });
           setPicLoading(false);
         } catch (err) {
@@ -104,7 +107,7 @@ const HealthDetailsPage = () => {
         symptoms: '',
         comments: '',
         medications: '',
-        scan: null
+        scan: ''
       });
 
       alert('Health details submitted successfully!');
@@ -125,8 +128,8 @@ const HealthDetailsPage = () => {
           value={formData.patientId}
           onChange={handleChange}
           required
-          pattern="\d{12}"
-          title="Govt ID must be a 12-digit numeric value."
+          //pattern="\d{12}"
+          //title="Govt ID must be a 12-digit numeric value."
         />
         {errors.govtId && <p className="error">{errors.govtId}</p>}
 
