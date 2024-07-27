@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const Records = require("./Records.js")
+import mongoose from "mongoose";
 
 const PatientSchema = mongoose.Schema({
     name:{

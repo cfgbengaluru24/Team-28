@@ -44,7 +44,7 @@ export const login = async (req,res) =>{
                 maxAge: time,
             })
             .status(200)
-            .json(adminDetails)
+            .json(adminDetails);
 
         }
         else{
@@ -61,3 +61,5 @@ export const logout = (req,res) =>{
     //ops
     res.clearCookie("token").status(200).json({message: "Logout Successful"})
 }
+
+
