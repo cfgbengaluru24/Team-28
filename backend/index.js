@@ -1,9 +1,10 @@
 const express = require('express');
 require("dotenv").config();
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-
-dotenv.config()
 const app = express();
 const {errorHandler, notFound}= require("./middleware/errorMiddleware")
 
