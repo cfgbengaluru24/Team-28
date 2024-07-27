@@ -4,7 +4,7 @@ import Doctor from '../models/Doctor.js';
 export const protect = async (req, res, next) => {
 //   console.log(req.cookies);
 
-    try {
+    try { 
       const token = req.cookies.token;
       //Bearer tokenhjfsd
 
