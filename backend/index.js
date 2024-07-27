@@ -5,12 +5,11 @@ const app = express();
 const port = process.env.PORT || 6000;
 
 // Replace with your MongoDB connection string
-const mongoURI ="";
+const mongoURI =process.env.MONGO_URI;
 
-// Connect to MongoDB
-// mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => console.log('MongoDB connected...'))
-//   .catch(err => console.log(err));
+ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+   .then(() => console.log('MongoDB connected...'))
+   .catch(err => console.log(err));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
