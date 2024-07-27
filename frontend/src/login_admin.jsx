@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'; 
 import axios from "axios"; // Import axios
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
@@ -82,7 +83,7 @@ const Login = () => {
           </div>
 
           <p className="login-bottom-p">
-            Don't have an account? <a href="#">Sign Up</a>
+            Don't have an account? <Link to="/Signup_admin">Sign Up</Link>
           </p>
         </div>
       </div>

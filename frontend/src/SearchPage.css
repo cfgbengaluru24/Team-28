@@ -1,0 +1,33 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; /* Adjust to center vertically within the view */
+    text-align: center;
+  }
+  
+  .search-header {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .search-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .search-controls select,
+  .search-controls input,
+  .search-controls button {
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .patient-details {
+    text-align: left;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+  
