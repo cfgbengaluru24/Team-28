@@ -14,6 +14,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const api = axios.create({withCredentials: true})
   // Handle login button click
   const handleLoginClick = async () => {
     try {
