@@ -8,9 +8,9 @@ const port = process.env.PORT || 6000;
 const mongoURI ="";
 
 // Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected...'))
-  .catch(err => console.log(err));
+// mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('MongoDB connected...'))
+//   .catch(err => console.log(err));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
