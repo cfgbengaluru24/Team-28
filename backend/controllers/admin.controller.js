@@ -61,3 +61,5 @@ export const logout = (req,res) =>{
     //ops
     res.clearCookie("token").status(200).json({message: "Logout Successful"})
 }
+
+
