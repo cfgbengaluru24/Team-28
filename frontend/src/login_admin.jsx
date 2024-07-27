@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate  } from 'react-router-dom'; 
 import axios from "axios"; // Import axios
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
@@ -10,6 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   // Handle login button click
   const handleLoginClick = async () => {
     try {
@@ -20,6 +23,7 @@ const Login = () => {
       if (response.status === 200) {
         alert("Login successful");
         // Handle successful login (e.g., redirect or store token)
+        navigate("/Profile");
       }
     } catch (error) {
       alert("Login failed: " + error.response.data.message);
@@ -82,7 +86,7 @@ const Login = () => {
           </div>
 
           <p className="login-bottom-p">
-            Don't have an account? <a href="#">Sign Up</a>
+            Don't have an account? <Link to="/Signup_admin">Sign Up</Link>
           </p>
         </div>
       </div>
