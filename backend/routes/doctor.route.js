@@ -1,9 +1,13 @@
-const doctorRouter = require('express').Router()
-import { login,register,logout } from '../controllers/doctor.controller';
+import express from 'express';
+const router = express.Router();
+import { login, register, logout, findPatientByGovtId, findPatientByName, findPatientByLocation } from '../controllers/doctor.controller.js';
 
-doctorRouter.post("/register",register)
-doctorRouter.post("/login",login)
-doctorRouter.post("/logout",logout)
+// Define your routes here
+router.post('/login', login);
+router.post('/register', register);
+router.post('/logout', logout);
+router.get('/patient/govtId/:govtId', findPatientByGovtId);
+router.get('/patient/name/:name', findPatientByName);
+router.get('/patient/location/:location', findPatientByLocation);
 
-doctorRouter.post("/patient_input")
-export default doctorRouter;
+module.exports = router;

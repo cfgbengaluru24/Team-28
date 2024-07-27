@@ -2,8 +2,7 @@ import bcrypt from "bcrypt"
 import Doctor from "../models/Doctor.js"
 import jwt from "jsonwebtoken"
 import Records from "../models/Records.js";
-const Patient = require('./models/Patient'); 
-const asyncHandler = require("express-async-handler")
+import Patient  from "./models/Patient.js";
 
 
 export const register = async (req,res) =>{
@@ -47,7 +46,7 @@ export const login = async (req,res) =>{
         const validPassword = await bcrypt.compare(password,user.password);
         
         if (validPassword){
-            // const token = jwt.sign({id : user._id},process.env.SECRET_KEY,{ expiresIn: "1h"})
+             const token = jwt.sign({id : user._id},process.env.SECRET_KEY,{ expiresIn: "1h"})
             // res.status(200).json({Authorization: token});
             const time = 1000 * 60 * 60
             const {password, ...userDetails} = user._doc;
