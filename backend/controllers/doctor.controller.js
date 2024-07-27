@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 import Doctor from "../models/Doctor.js"
 import jwt from "jsonwebtoken"
 import Records from "../models/Records.js";
-import Patient  from "./models/Patient.js";
+import Patient  from "../models/Patient.js";
 
 
 export const register = async (req,res) =>{

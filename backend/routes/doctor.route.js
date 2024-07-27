@@ -13,7 +13,7 @@ doctorRouter.get('/patient/location',protect, findPatientByLocation);
 doctorRouter.post('/patient/add',protect, addPatient);
 doctorRouter.post('/patient/record/add',protect, addRecord);
 doctorRouter.get('/me',protect, getDoctorById );
-doctorRouter.get('/patient/hemochart', getHaemoglobinVsWeight)
+// doctorRouter.get('/patient/hemochart', getHaemoglobinVsWeight)
 
 
 
