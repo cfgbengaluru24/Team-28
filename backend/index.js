@@ -1,8 +1,19 @@
 const express = require('express');
 require("dotenv").config();
 const mongoose = require('mongoose');
+
+
+dotenv.config()
 const app = express();
 const {errorHandler, notFound}= require("./middleware/errorMiddleware")
+
+
+app.use(bodyParser.json({extended:true}))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(cors({credentials: true ,origin:'http://localhost:3000'}))
+
+
 const port = process.env.PORT || 6000;
 
 // Replace with your MongoDB connection string
