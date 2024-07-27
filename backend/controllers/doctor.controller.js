@@ -31,7 +31,7 @@ export const register = async (req,res) =>{
 
     }
     catch(err){
-        res.status(500).json({error:"Incorrect email/password"});
+        res.status(500).json({meassage:"Incorrect email/password"});
     }
 }
 
@@ -66,7 +66,7 @@ export const login = async (req,res) =>{
 
     }
     catch(err){
-        res.status(500).json({error:err.message})
+        res.status(500).json({message:err.message})
     }
 }
 
@@ -76,10 +76,12 @@ export const logout = (req,res) =>{
     res.clearCookie("token").status(200).json({message: "Logout Successful"})
 }
 
+
+
 export const addPatient = async (req,res) => {
     try{
         const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
-        const {doctorId} = res.cookie;
+        const id = res.decoded;
         const patient = await Patient.findOne({govtId:govtId});
         if (patient){
             res.status(401).json({"message" : "Patient already exists"})
@@ -99,7 +101,7 @@ export const addPatient = async (req,res) => {
         // Save the patient and create a corresponding record
         const savedPatient = await newPatient.save();
 
-        const doctor = await Doctor.findById(doctorId);
+        const doctor = await Doctor.findById(id);
         if (!doctor) {
             throw new Error('Doctor not found');
         }
@@ -109,7 +111,7 @@ export const addPatient = async (req,res) => {
         res.status(201).json({message: "Patient successfully created!"});
     }
     catch(err){
-        res.status(500).json({error:err.message});
+        res.status(500).json({message:err.message});
     }
 }
 
@@ -128,7 +130,7 @@ export const findPatientByGovtId = async (req, res) => {
             Records: patient.Records
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ meassage: err.message });
     }
 };
 
@@ -147,7 +149,7 @@ export const findPatientByName = async (req, res) => {
             Records: patient.Records
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 };
 
@@ -166,8 +168,51 @@ export const findPatientByLocation = async (req, res) => {
             Records: patient.Records
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 };
 
 
+export const addRecord = async (req,res) => {
+    const {
+        date,
+        patientId,
+        comments,
+        medication,
+        symptoms,
+        scan,
+        haemoglobin,
+        weight,
+        height,
+        bp
+    } = req.body;
+    const docId = req.decoded;
+
+    try {
+        const newRecord = new Records({
+            date,
+            patientId,
+            docId,
+            comments,
+            medication,
+            symptoms,
+            scan,
+            haemoglobin,
+            weight,
+            height,
+            bp
+        });
+
+        const savedRecord = await newRecord.save();
+        res.status(201).json({
+            message: "Record added successfully",
+            record: savedRecord
+        });
+    } catch (error) {
+        console.error("Error adding record:", error);
+        res.status(500).json({
+            message: "Failed to add record",
+            error: error.message
+        });
+    }
+}
