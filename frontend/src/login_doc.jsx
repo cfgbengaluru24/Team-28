@@ -13,7 +13,7 @@ const Login = () => {
   // Handle login button click
   const handleLoginClick = async () => {
     try {
-      const response = await axios.post("http://localhost:6000/api/doctor/login", {
+      const response = await axios.post("http://localhost:8100/api/doctor/login", {
         email,
         password
       });

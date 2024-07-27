@@ -24,7 +24,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       // Make POST request to the backend
-      const response = await axios.post('http://localhost:6000/api/doctor/register', formData);
+      const response = await axios.post('http://localhost:8100/api/doctor/register', formData);
       alert(response.data.message); // Alert on successful registration
       // Optionally redirect or reset form
       setFormData({
@@ -35,6 +35,7 @@ const Signup = () => {
         speciality: ''
       });
     } catch (error) {
+      console.log(error.message);
       alert('Signup failed: ' + error.response?.data?.error || error.message); // Alert on failure
     }
   };

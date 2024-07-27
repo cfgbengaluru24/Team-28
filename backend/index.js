@@ -21,7 +21,7 @@ app.use('/api/doctor', doctorRouter);
 app.use('/api/admin', adminRouter);
 // app.use('api/patient',patientrouter);
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 
 // Replace with your MongoDB connection string
 const mongoURI =process.env.MONGO_URI;
