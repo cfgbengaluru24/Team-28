@@ -44,7 +44,7 @@ export const login = async (req,res) =>{
                 maxAge: time,
             })
             .status(200)
-            .json(adminDetails)
+            .json(adminDetails);
 
         }
         else{
