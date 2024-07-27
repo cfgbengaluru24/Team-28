@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './UploadDetails.css';
+import axios from 'axios';
+
+const api = axios.create({withCredentials:true})
 
 const PatientDetailsPage = () => {
   const [formData, setFormData] = useState({
@@ -45,26 +48,31 @@ const PatientDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8100/api/doctor/addPatient', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
 
-      if (!response.ok) {
+      // const response = await fetch('http://localhost:8100/api/doctor/addPatient', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(formData)
+      // });
+      // console.log(formData)
+      const response = await api.post('http://localhost:8100/api/doctor/addPatient',{
+        formData
+      })
+
+      if (response.status !== 201) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       setFormData({
-        govtId: '',
         name: '',
-        dob: '',
-        contact: '',
-        location: '',
+        govtId: '',
+        DoB: '',
         gender: '',
-        bloodGroup: ''
+        blood_group: '',
+        location: '',
+        contact: ''
       });
 
       alert('Patient details submitted successfully!');

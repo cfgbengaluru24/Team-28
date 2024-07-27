@@ -4,7 +4,7 @@ import React from 'react';
 //import './Signup.css';
 //import Signup from './Signup_admin';
 
-import DoctorProfile from '../Profile';
+// import DoctorProfile from '../Profile';
 
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ import LoginAdmin from './login_admin.jsx';
 import LoginDoc from './login_doc.jsx';
 import SignupDoc from './Signup_doc';
 import SignupAdmin from './Signup_admin';
+import Navbar from './NavBar';
 
 function App() {
   return (
@@ -29,10 +30,10 @@ function App() {
           <Route path="/login_doc" element={<LoginDoc />} />
           <Route path="/Signup_doc" element={<SignupDoc />} />
           <Route path="/Signup_admin" element={<SignupAdmin />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/PatientDetails" element={<PatientDetails />} />
-          <Route path="/healthDetails" element={<HealthDetails />} />
+          <Route path="/profile" element={<><Navbar /><Profile /></>} />
+          <Route path="/search" element={<><Navbar /><SearchPage /></>} />
+          <Route path="/PatientDetails" element={<><Navbar /><PatientDetails /></>} />
+          <Route path="/healthDetails" element={<><Navbar /><HealthDetails /></>} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

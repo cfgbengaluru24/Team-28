@@ -16,6 +16,7 @@ const HealthDetailsPage = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [picLoading, setPicLoading] = useState(false); // To handle loading state of image upload
 
   const validateForm = () => {
     const newErrors = {};
@@ -28,12 +29,44 @@ const HealthDetailsPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value, type, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'file' ? files[0] : value
-    });
+    if (type === 'file') {
+      const file = files[0];
+      if (file && (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+        setPicLoading(true);
+
+        // Upload image to Cloudinary
+        try {
+          const data = new FormData();
+          data.append("file", file);
+          data.append("upload_preset", "chat-app");
+          data.append("cloud_name", "dlkpgjqvq");
+
+          const res = await fetch("https://api.cloudinary.com/v1_1/dlkpgjqvq/image/upload", {
+            method: "post",
+            body: data,
+          });
+
+          const result = await res.json();
+          setFormData({
+            ...formData,
+            [name]: result.url // Set the URL of the uploaded image
+          });
+          setPicLoading(false);
+        } catch (err) {
+          console.error('Error uploading image:', err);
+          setPicLoading(false);
+        }
+      } else {
+        alert('Please upload a valid image file (png, jpeg, jpg).');
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -49,7 +82,7 @@ const HealthDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('https://your-api-endpoint/health-details', {
+      const response = await fetch('http://localhost:8100/api/doctor/patient/record/add', {
         method: 'POST',
         body: dataToSend
       });
@@ -169,6 +202,7 @@ const HealthDetailsPage = () => {
           name="scanImage"
           onChange={handleChange}
         />
+        {picLoading && <p>Loading image...</p>} {/* Show loading text while uploading */}
 
         <button type="submit">Submit</button>
       </form>

@@ -7,7 +7,7 @@ function SearchPage() {
   const [patientDetails, setPatientDetails] = useState(null);
 
   const handleSearch = async () => {
-    const response = await fetch(`https://your-api-endpoint/patients?${filter}=${query}`);
+    const response = await fetch(`https://localhost:8100/api/doctor/findPatientBy${filter}=${query}`);
     const data = await response.json();
     setPatientDetails(data);
   };
