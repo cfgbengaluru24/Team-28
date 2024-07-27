@@ -1,19 +1,24 @@
-const express = require('express');
-require("dotenv").config();
-const mongoose = require('mongoose');
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+import express from 'express';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import doctorRouter from './routes/doctor.route.js';
+
+
+dotenv.config();
 
 const app = express();
-const {errorHandler, notFound}= require("./middleware/errorMiddleware")
-
-
 app.use(bodyParser.json({extended:true}))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors({credentials: true ,origin:'http://localhost:3000'}))
 
+  
+app.use('/api/doctor', doctorRouter);
+app.use('/api/admin', adminrouter);
+app.use('api/patient',patientrouter);
 
 const port = process.env.PORT || 6000;
 
@@ -25,10 +30,4 @@ const mongoURI =process.env.MONGO_URI;
    .then(()=> app.listen(port, () => { 
     console.log(`Server is running on http://localhost:${port}`);}))
    .catch(err => console.log(err));
-  
-// app.use('/api/user', );
-
-
-app.use(notFound); 
-app.use(errorHandler);
 

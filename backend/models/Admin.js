@@ -1,24 +1,19 @@
 const mongoose = require("mongoose");
 
-const DoctorSchema = mongoose.Schema({
+const AdminSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
-    isVolunteer: {
-        type: Boolean,
-        default: false,
-    },  
-    patients: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Patient',
-    }],
     password: {
         type:String,
         required:true,
     },
-    contact: {
+    name: {
         type: String,
+        required: true
     }
 });
-const Doctor = mongoose.model("Doctor", DoctorSchema);
+const Admin = mongoose.model("Admin", AdminSchema);
+export default Admin;
