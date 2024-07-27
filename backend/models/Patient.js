@@ -34,10 +34,10 @@ const PatientSchema = mongoose.Schema({
     contact:{
         type:Number
     },
-    records:{
-        type: [Records],
-        default : [] 
-    }
+    records:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Record" 
+    }],
 })
 
 const Patient = mongoose.model("Patient",PatientSchema);
