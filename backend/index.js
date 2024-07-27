@@ -14,6 +14,9 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors({credentials: true ,origin:'http://localhost:3000'}))
 
+app.use('/api/user', userRoutes); // This will handle routes under /api/user
+app.use('/api/admin', adminRoutes); // This will handle routes under /api/admin
+
 
 const port = process.env.PORT || 6000;
 
