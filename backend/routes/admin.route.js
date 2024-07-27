@@ -1,6 +1,6 @@
 import express from 'express';
 const adminRouter = express.Router();
-import { login, register, logout, findPatientByGovtId, findPatientByName, findPatientByLocation } from '../controllers/doctor.controller.js';
+import { login, register, logout } from '../controllers/admin.controller.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 // Define your routes here
