@@ -31,7 +31,7 @@ export const register = async (req,res) =>{
 
     }
     catch(err){
-        res.status(500).json({meassage:"Incorrect email/password"});
+        res.status(500).json({meassage:err.message});
     }
 }
 
