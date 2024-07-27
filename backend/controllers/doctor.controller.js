@@ -90,14 +90,19 @@ export const getDoctorById = async (req, res) => {
 
 export const addPatient = async (req,res) => {
     try{
-        const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
+        
+        const { name, govtId, DoB, gender, blood_group, location, contact } = req.body.formData;
+        console.log( name, govtId, DoB, gender, blood_group, location, contact)
+        
+        // DoB = new Date(DoB);
+        // console.log(DoB)
         const id = req.decoded;
-        console.log(id)
+        // contact =  contact ? contact : ""
         const patient = await Patient.findOne({govtId:govtId});
         if (patient){
             throw new Error("Patient already exists");
         }
-
+        console.log(contact);
         // Create a new patient
         const newPatient = new Patient({
             name,
@@ -106,12 +111,13 @@ export const addPatient = async (req,res) => {
             gender,
             blood_group,
             location,
-            contact
+            contact,
         });
-
+        
         // Save the patient and create a corresponding record
-        const savedPatient = await newPatient.save();
-
+        await newPatient.save();
+        console.log(id)
+        
         const doctor = await Doctor.findById(id);
         if (!doctor) {
             res.status(500).json({message: "Doctor Not Found!"});
@@ -185,6 +191,7 @@ export const findPatientByLocation = async (req, res) => {
 
 
 export const addRecord = async (req,res) => {
+    console.log(req.body);
     const {
         date,
         patientId,
@@ -196,8 +203,9 @@ export const addRecord = async (req,res) => {
         weight,
         height,
         bp
-    } = req.body;
+    } = req.body.formData;
     const docId = req.decoded;
+    console.log(docId);
 
     try {
         const newRecord = new Records({
