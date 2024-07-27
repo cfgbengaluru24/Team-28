@@ -18,23 +18,23 @@ body {
   color: white;
   background: rgba(0, 0, 0, 0.6); /* Slightly darker for better contrast */
   padding: 20px;
+  padding-top: 40px; /* Added padding to the top */
   border-radius: 12px;
   width: 100%;
-  max-width: 700px; /* Increased max-width for a wider form */
+  max-width: 500px; /* Adjusted max-width for a better fit */
   box-sizing: border-box; /* Ensure padding is included in width */
   overflow: hidden; /* Hide any overflow */
 }
 
 .signup-logo {
-  max-width: 70%; /* Scale logo with container width */
+  max-width: 50%; /* Adjusted max-width for logo */
   height: auto; /* Maintain aspect ratio */
-  margin: 0 auto 10px auto;
-  margin-bottom : 10px;
+  margin-bottom: 20px; /* Added margin to the bottom */
   display: block; /* Ensure logo is a block element */
 }
 
 .signup-form {
-  width: 70%;
+  width: 100%; /* Full width for better fit */
 }
 
 .form-group {
@@ -52,7 +52,7 @@ body {
 .form-group input[type="password"],
 .form-group input[type="tel"] {
   width: 100%;
-  padding: 12px; /* Increased padding for a more spacious feel */
+  padding: 10px; /* Slightly decreased padding for a better fit */
   border: 1px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
@@ -64,7 +64,7 @@ body {
 
 .signup-button {
   width: 100%;
-  padding: 12px; /* Increased padding for a more comfortable button */
+  padding: 10px; /* Slightly decreased padding for a better fit */
   border: none;
   border-radius: 8px;
   background-color: #4CAF50;

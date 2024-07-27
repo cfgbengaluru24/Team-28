@@ -23,7 +23,9 @@ const Signup = () => {
     e.preventDefault();
     try {
       // Make POST request to the backend
-      const response = await axios.post('http://localhost:8100/api/admin/register', formData);
+
+      const response = await axios.post('http://localhost:8100/api/doctor/register', formData);
+
       alert(response.data.message); // Alert on successful registration
       // Optionally redirect or reset form
       setFormData({
