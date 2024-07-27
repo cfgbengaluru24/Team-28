@@ -4,8 +4,8 @@ import React from 'react';
 //import './Signup.css';
 //import Signup from './Signup_admin';
 
-// import DoctorProfile from '../Profile';
 
+import DoctorProfile from './DoctorProfile.js';
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
@@ -35,6 +35,7 @@ function App() {
           <Route path="/PatientDetails" element={<><Navbar /><PatientDetails /></>} />
           <Route path="/healthDetails" element={<><Navbar /><HealthDetails /></>} />
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/myprofile" element={<><Navbar /><DoctorProfile/></>}/>
         </Routes>
       </div>
     </Router>

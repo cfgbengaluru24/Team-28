@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import './UploadDetails.css';
+import axios from 'axios';
+
+const api = axios.create({withCredentials:true})
 
 const HealthDetailsPage = () => {
   const [formData, setFormData] = useState({
-    govtId: '',
+    patientId: '',
     date: '',
     height: '',
     weight: '',
     haemoglobin: '',
-    bloodPressure: '',
+    bp: '',
     symptoms: '',
     comments: '',
-    medicines: '',
-    scanImage: null
+    medication: '',
+    scan: null
   });
 
   const [errors, setErrors] = useState({});
@@ -82,26 +85,26 @@ const HealthDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8100/api/doctor/patient/record/add', {
-        method: 'POST',
-        body: dataToSend
+      const response = await api.post('http://localhost:8100/api/doctor/patient/record/add',{
+        formData
       });
 
-      if (!response.ok) {
+      if (response.status !== 201) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       setFormData({
-        govtId: '',
+        patientId: '',
         date: '',
+        docId: '',
         height: '',
         weight: '',
         haemoglobin: '',
-        bloodPressure: '',
+        bp: '',
         symptoms: '',
         comments: '',
-        medicines: '',
-        scanImage: null
+        medications: '',
+        scan: null
       });
 
       alert('Health details submitted successfully!');
@@ -118,8 +121,8 @@ const HealthDetailsPage = () => {
         <label>Govt ID <span className="required">*</span>:</label>
         <input
           type="text"
-          name="govtId"
-          value={formData.govtId}
+          name="patientId"
+          value={formData.patientId}
           onChange={handleChange}
           required
           pattern="\d{12}"
@@ -166,8 +169,8 @@ const HealthDetailsPage = () => {
         <label>Blood Pressure <span className="required">*</span>:</label>
         <input
           type="text"
-          name="bloodPressure"
-          value={formData.bloodPressure}
+          name="bp"
+          value={formData.bp}
           onChange={handleChange}
           required
         />
@@ -190,8 +193,8 @@ const HealthDetailsPage = () => {
 
         <label>Medicines Recommended <span className="required">*</span>:</label>
         <textarea
-          name="medicines"
-          value={formData.medicines}
+          name="medication"
+          value={formData.medication}
           onChange={handleChange}
           required
         ></textarea>
@@ -199,7 +202,7 @@ const HealthDetailsPage = () => {
         <label>Upload Scan Image:</label>
         <input
           type="file"
-          name="scanImage"
+          name="scan"
           onChange={handleChange}
         />
         {picLoading && <p>Loading image...</p>} {/* Show loading text while uploading */}

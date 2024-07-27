@@ -8,11 +8,11 @@ const PatientDetailsPage = () => {
   const [formData, setFormData] = useState({
     govtId: '',
     name: '',
-    dob: '',
+    DoB: '',
     contact: '', // Optional
     location: '',
     gender: '',
-    bloodGroup: '',
+    blood_group: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -57,7 +57,7 @@ const PatientDetailsPage = () => {
       //   body: JSON.stringify(formData)
       // });
       // console.log(formData)
-      const response = await api.post('http://localhost:8100/api/doctor/addPatient',{
+      const response = await api.post('http://localhost:8100/api/doctor/patient/add',{
         formData
       })
 
@@ -110,8 +110,8 @@ const PatientDetailsPage = () => {
         <label>Date of Birth <span className="required">*</span>:</label>
         <input
           type="date"
-          name="dob"
-          value={formData.dob}
+          name="DoB"
+          value={formData.DoB}
           onChange={handleChange}
           required
         />
@@ -151,8 +151,8 @@ const PatientDetailsPage = () => {
 
         <label>Blood Group <span className="required">*</span>:</label>
         <select
-          name="bloodGroup"
-          value={formData.bloodGroup}
+          name="blood_group"
+          value={formData.blood_group}
           onChange={handleChange}
           required
         >
