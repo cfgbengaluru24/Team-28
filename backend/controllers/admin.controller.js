@@ -8,16 +8,16 @@ export const register = async (req,res) =>{
         const {name,email,password } = req.body;
         const hashedPassword = await bcrypt.hash(password,8);
         const newUser = new Admin({
-            username:username,
+            name:name,
             email:email,
             password:hashedPassword
         })
         await newUser.save()
-        res.status(201).json({message: "User successfully created!"});
+        res.status(201).json({message: "Admin account successfully created!"});
 
     }
     catch(err){
-        res.status(500).json({error:"Email/username already exists"});
+        res.status(500).json({error:"Email already exists"});
     }
 }
 
@@ -26,32 +26,30 @@ export const login = async (req,res) =>{
     try{
         const {email,password} = req.body;
         // console.log(username,password);
-        const user = await Admin.findOne({username:username});
-        if (!user){
+        const admin = await Admin.findOne({email:email});
+        if (!admin){
             res.status(401).json({"message" : "Username does not exists"})
         }
-        const validPassword = await bcrypt.compare(password,user.password);
+        const validPassword = await bcrypt.compare(password,admin.password);
         
         if (validPassword){
-            // const token = jwt.sign({id : user._id},process.env.SECRET_KEY,{ expiresIn: "1h"})
+            const token = jwt.sign({email : admin.email},process.env.SECRET_KEY,{ expiresIn: "1h"})
             // res.status(200).json({Authorization: token});
             const time = 1000 * 60 * 60
-            const {password, ...userDetails} = user._doc;
-            // console.log(userDetails)
+            const {password, ...adminDetails} = admin._doc;
+            // console.log(adminDetails)
             res.cookie("token",token, {
                 httpOnly: true,
                 // secure: true,
                 maxAge: time,
             })
             .status(200)
-            .json(userDetails)
-            // console.log("Sent")
+            .json(adminDetails)
 
         }
         else{
             res.status(401).json({message:"Incorrect username/password"})
         }
-        // res.send(validPassword);
 
     }
     catch(err){
