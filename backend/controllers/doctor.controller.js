@@ -98,7 +98,7 @@ export const addPatient = async (req,res) => {
         if (patient){
             throw new Error("Patient already exists");
         }
-
+ 
         // Create a new patient
         const newPatient = new Patient({
             name,

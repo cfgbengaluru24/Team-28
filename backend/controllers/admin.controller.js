@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt"
 import Admin from "../models/Admin.js"
 import jwt from "jsonwebtoken"
+import Records from "../models/Records.js"
 
 export const register = async (req,res) =>{
     //ops
@@ -63,7 +64,7 @@ export const logout = (req,res) =>{
 }
 
 
-export const getHaemoglobinVsWeight = async (filter) => {
+export const getHaemoglobinVsWeight = async (req, res) => {
     try {
         const result = await Records.aggregate([
             {
@@ -77,12 +78,11 @@ export const getHaemoglobinVsWeight = async (filter) => {
                 $sort: { haemoglobin: 1 } // Sort by haemoglobin value
             },
             
-        ]);
+        ]).exec();
 
-        console.log("Haemoglobin vs Weight Data:", result);
-        return result;
+        res.status(200).json({result});
     } catch (error) {
-        throw new Error(err.message);
+        res.status(500).json({message:error.message});
     }
 };
 

@@ -18,6 +18,7 @@ import LoginAdmin from './login_admin.jsx';
 import LoginDoc from './login_doc.jsx';
 import SignupDoc from './Signup_doc';
 import SignupAdmin from './Signup_admin';
+import Analyze from './Analyze.js';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/healthDetails" element={<HealthDetails />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/myprofile" element={<DoctorProfile/>}/>
+          <Route path="/analyze" element={<Analyze/>}/>
         </Routes>
       </div>
     </Router>

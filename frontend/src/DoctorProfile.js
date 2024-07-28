@@ -50,7 +50,7 @@ const DoctorProfile = () => {
     const [error, setError] = useState('');
  
     useEffect(() => {
-      const fetchDoctor = async () => {
+      const fetchDoctor = async () => { 
        try {
           const response = await api.get("http://localhost:8100/api/doctor/me");
           console.log(response.data);
