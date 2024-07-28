@@ -1,43 +1,4 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import './profilestyles.css';
 
-// const Profile = () => {
-//   const [doctor, setDoctor] = useState(null);
-//   const [error, setError] = useState('');
-
-//   useEffect(() => {
-//     const fetchDoctor = async () => {
-//       try {
-//         const response = await axios.get('/api/doctor/me');
-//         setDoctor(response.data);
-//       } catch (err) {
-//         setError('Error fetching doctor data');
-//       }
-//     };
-
-//     fetchDoctor();
-//   }, []);
-
-//   if (error) {
-//     return <div>{error}</div>;
-//   }
-
-//   if (!doctor) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div className="profile">
-//       <h1>Doctor Profile</h1>
-//       <img src="path/to/doctor/image" alt="Doctor" className="profile-image" />
-//       <div className="profile-details">
-//         <p><strong>Name:</strong> {doctor.name}</p>
-//         <p><strong>Email:</strong> {doctor.email}</p>
-//         <p><strong>Contact:</strong> {doctor.contact}</p>
-//         <p><strong>Speciality:</strong> {doctor.speciality}</p>
-//         <p><strong>Volunteer:</strong> {doctor.isVolunteer ? 'Yes' : 'No'}</p>
-//       </div>
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -50,7 +11,7 @@ const DoctorProfile = () => {
     const [error, setError] = useState('');
  
     useEffect(() => {
-      const fetchDoctor = async () => {
+      const fetchDoctor = async () => { 
        try {
           const response = await api.get("http://localhost:8100/api/doctor/me");
           console.log(response.data);

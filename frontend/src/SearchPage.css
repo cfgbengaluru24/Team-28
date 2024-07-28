@@ -1,10 +1,21 @@
-.search-container {
+/* .search-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 40vh; /* Adjust to center vertically within the view */
+    /*
     text-align: center;
+  } 
+  */
+
+  .search-container {
+    max-width: 600px;
+    margin: 70px auto 20px auto; /* Add margin-top to accommodate the navbar height */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
   }
   
   .search-header {
