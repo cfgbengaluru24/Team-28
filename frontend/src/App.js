@@ -4,7 +4,7 @@ import React from 'react';
 //import './Signup.css';
 //import Signup from './Signup_admin';
 
-import DoctorProfile from '../Profile';
+// import DoctorProfile from '../Profile';
 
 
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ import LoginAdmin from './login_admin.jsx';
 import LoginDoc from './login_doc.jsx';
 import SignupDoc from './Signup_doc';
 import SignupAdmin from './Signup_admin';
+import Chat from './Chat.jsx';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/PatientDetails" element={<PatientDetails />} />
           <Route path="/healthDetails" element={<HealthDetails />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

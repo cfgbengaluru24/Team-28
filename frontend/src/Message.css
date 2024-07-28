@@ -1,0 +1,18 @@
+/* src/Message.css */
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    font-size: large;
+  }
+  
+  .message.human {
+    align-self: flex-end;
+    background-color: #d1f7d1;
+  }
+  
+  .message.ai {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+  }
+  

@@ -1,0 +1,29 @@
+/* src/App.css */
+.Chat {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    height: 100%;
+    overflow: scroll;
+  }
+  
+  .Chat-header {
+    background-color: #282c34;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .Chat-header h1 {
+    margin: 0;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
