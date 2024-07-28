@@ -39,7 +39,7 @@ body {
     max-width: 600px;
     margin: 70px auto 20px auto; /* Add margin-top to accommodate the navbar height */
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 8px;
     background-color: #f9f9f9;
   }
@@ -65,7 +65,7 @@ body {
     margin-bottom: 15px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 4px;
   }
   

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import './UploadDetails.css';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const api = axios.create({withCredentials:true})
 
-const HealthDetailsPage = (props) => {
+const HealthDetailsPage = () => {
+  const location = useLocation();
+  const props = location.state;
   const [formData, setFormData] = useState({
     patientId: '',
-    date: props.date ? props.date : '',
+    date: "",
     height: props.height ? props.height : '',
     weight: props.weight ? props.weight : '',
     haemoglobin: props.haemoglobin ? props.haemoglobin : '',
