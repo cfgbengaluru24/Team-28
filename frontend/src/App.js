@@ -4,9 +4,6 @@ import React from 'react';
 //import './Signup.css';
 //import Signup from './Signup_admin';
 
-
-import DoctorProfile from './DoctorProfile.js';
-
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import SearchPage from './SearchPage';
@@ -18,6 +15,8 @@ import LoginDoc from './login_doc.jsx';
 import SignupDoc from './Signup_doc';
 import SignupAdmin from './Signup_admin';
 import Navbar from './NavBar';
+import DoctorProfile from './DoctorProfile.js';
+import AdminProfile from './AdminProfile.js';
 
 function App() {
   return (
@@ -33,7 +32,8 @@ function App() {
           <Route path="/PatientDetails" element={<><Navbar /><PatientDetails /></>} />
           <Route path="/healthDetails" element={<><Navbar /><HealthDetails /></>} />
           <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/myprofile" element={<><Navbar /><DoctorProfile/></>}/>
+          <Route isDoctor={true} path="/myprofile" element={<><Navbar /><DoctorProfile/></>}/>
+          <Route isAdmin={true} path="/myprofile" element={<><Navbar /><AdminProfile/></>}/>
         </Routes>
       </div>
     </Router>

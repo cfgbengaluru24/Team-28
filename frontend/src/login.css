@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -56,7 +55,7 @@ body {
 }
 
 .login-logo img {
-  width: 50px;
+  width: 150px;
 }
 
 .login-center h2 {
@@ -142,7 +141,6 @@ form button[type='button'] {
   display: block;
     width: 200px;
     margin: 10px auto;
-    padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #45A049;

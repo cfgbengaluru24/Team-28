@@ -146,7 +146,6 @@ const PatientDetailsPage = () => {
           <option value="">Select</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Other">Other</option>
         </select>
 
         <label>Blood Group <span className="required">*</span>:</label>

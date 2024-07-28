@@ -4,18 +4,18 @@ import axios from 'axios';
 
 const api = axios.create({withCredentials:true})
 
-const HealthDetailsPage = () => {
+const HealthDetailsPage = (props) => {
   const [formData, setFormData] = useState({
     patientId: '',
-    date: '',
-    height: '',
-    weight: '',
-    haemoglobin: '',
-    bp: '',
-    symptoms: '',
-    comments: '',
-    medication: '',
-    scan: null
+    date: props.date ? props.date : '',
+    height: props.height ? props.height : '',
+    weight: props.weight ? props.weight : '',
+    haemoglobin: props.haemoglobin ? props.haemoglobin : '',
+    bp: props.bp ? props.bp : '',
+    symptoms: props.symptoms ? props.symptoms : '',
+    comments: props.comments ? props.comments : '',
+    medications: props.medications ? props.medications : '',
+    scan: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -98,16 +98,16 @@ const HealthDetailsPage = () => {
 
       setFormData({
         patientId: '',
+        patientId: '',
         date: '',
-        docId: '',
         height: '',
         weight: '',
         haemoglobin: '',
         bp: '',
         symptoms: '',
         comments: '',
-        medications: '',
-        scan: ''
+        medication: '',
+        scan: null   
       });
 
       alert('Health details submitted successfully!');
