@@ -147,23 +147,26 @@ form button[type='button'] {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    height: 40px;
 }
 
 .login-center-buttons button:nth-child(1) {
 
   color: white;
-  font-size: 1.6rem;
+  /*font-size: 1.6rem; */
   display: block;
     
-    margin: 10px auto;
-    padding: 10px;
+    margin: 1px auto;
+    padding-bottom: 20px;
     border: none;
     border-radius: 5px;
     background-color: #45A049;
     color: white;
     font-size: 16px;
     cursor: pointer;
+    height:10px;
 }
+
 
 .login-center-buttons button:nth-child(1):hover {
   background-color: #45A049;
@@ -188,7 +191,7 @@ form button[type='button'] {
   color: white;
   font-size: 1.6rem;
   display: block;
-    margin: 10px auto;
+    margin: 0px auto;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -197,7 +200,7 @@ form button[type='button'] {
 }
 
 .logo {
-    width: 50px;
+    width: 200px;
     /* Adjust size as needed */
     height: auto;
     display: block;
