@@ -21,9 +21,9 @@ const Login = () => {
         password
       });
       if (response.status === 200) {
-        alert("Login successful");
+        //alert("Login successful");
         // Handle successful login (e.g., redirect or store token)
-        navigate("/Profile");
+        navigate("/myprofile");
       }
     } catch (error) {
       alert("Login failed: " + error.response.data.message);
