@@ -6,12 +6,12 @@ const recordsSchema = mongoose.Schema({
         required:true
     },
     patientId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Patient"
+        type: String,
+        required: true
     },
     docID:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Doctor"
+        ref: "Doctor" 
     },
     comments:{
         type: String,

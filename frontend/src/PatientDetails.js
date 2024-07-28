@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import './UploadDetails.css';
+import axios from 'axios';
+
+const api = axios.create({withCredentials:true})
 
 const PatientDetailsPage = () => {
   const [formData, setFormData] = useState({
     govtId: '',
     name: '',
-    dob: '',
+    DoB: '',
     contact: '', // Optional
     location: '',
     gender: '',
-    bloodGroup: '',
+    blood_group: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -45,26 +48,31 @@ const PatientDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8100/api/doctor/addPatient', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
 
-      if (!response.ok) {
+      // const response = await fetch('http://localhost:8100/api/doctor/addPatient', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(formData)
+      // });
+      // console.log(formData)
+      const response = await api.post('http://localhost:8100/api/doctor/patient/add',{
+        formData
+      })
+
+      if (response.status !== 201) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       setFormData({
-        govtId: '',
         name: '',
-        dob: '',
-        contact: '',
-        location: '',
+        govtId: '',
+        DoB: '',
         gender: '',
-        bloodGroup: ''
+        blood_group: '',
+        location: '',
+        contact: ''
       });
 
       alert('Patient details submitted successfully!');
@@ -102,8 +110,8 @@ const PatientDetailsPage = () => {
         <label>Date of Birth <span className="required">*</span>:</label>
         <input
           type="date"
-          name="dob"
-          value={formData.dob}
+          name="DoB"
+          value={formData.DoB}
           onChange={handleChange}
           required
         />
@@ -138,13 +146,12 @@ const PatientDetailsPage = () => {
           <option value="">Select</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Other">Other</option>
         </select>
 
         <label>Blood Group <span className="required">*</span>:</label>
         <select
-          name="bloodGroup"
-          value={formData.bloodGroup}
+          name="blood_group"
+          value={formData.blood_group}
           onChange={handleChange}
           required
         >

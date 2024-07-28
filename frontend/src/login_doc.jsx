@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./login.css";
 import logo from "./images/logo.png";
 
+const api = axios.create({withCredentials: true})
 const Login = () => {
   // State for email, password, and password visibility
   const [email, setEmail] = useState("");
@@ -22,9 +23,9 @@ const Login = () => {
         password
       });
       if (response.status === 200) {
-        alert("Login successful");
+        //alert("Login successful");
         // Handle successful login (e.g., redirect or store token)
-        navigate("/Profile");
+        navigate("/myprofile");
       }
     } catch (error) {
       // Check if error.response exists

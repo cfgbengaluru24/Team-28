@@ -1,39 +1,78 @@
 import React, { useState } from 'react';
 import './UploadDetails.css';
+import axios from 'axios';
 
-const HealthDetailsPage = () => {
+const api = axios.create({withCredentials:true})
+
+const HealthDetailsPage = (props) => {
   const [formData, setFormData] = useState({
-    govtId: '',
-    date: '',
-    height: '',
-    weight: '',
-    haemoglobin: '',
-    bloodPressure: '',
-    symptoms: '',
-    comments: '',
-    medicines: '',
-    scanImage: null
+    patientId: '',
+    date: props.date ? props.date : '',
+    height: props.height ? props.height : '',
+    weight: props.weight ? props.weight : '',
+    haemoglobin: props.haemoglobin ? props.haemoglobin : '',
+    bp: props.bp ? props.bp : '',
+    symptoms: props.symptoms ? props.symptoms : '',
+    comments: props.comments ? props.comments : '',
+    medications: props.medications ? props.medications : '',
+    scan: ''
   });
 
   const [errors, setErrors] = useState({});
+  const [pic, setPic] = useState(false); // To handle loading state of image upload
+  const [picLoading, setPicLoading] = useState(false); // To handle loading state of image upload
+
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!/^\d{12}$/.test(formData.govtId)) {
-      newErrors.govtId = 'Govt ID must be a 12-digit numeric value.';
-    }
+    // if (!/^\d{12}$/.test(formData.govtId)) {
+    //   newErrors.govtId = 'Govt ID must be a 12-digit numeric value.';
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value, type, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'file' ? files[0] : value
-    });
+    if (type === 'file') {
+      const file = files[0];
+      if (file && (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+        setPicLoading(true);
+
+        // Upload image to Cloudinary
+        try {
+          const data = new FormData();
+          data.append("file", file);
+          data.append("upload_preset", "chat-app");
+          data.append("cloud_name", "dlkpgjqvq");
+
+          const res = await fetch("https://api.cloudinary.com/v1_1/dlkpgjqvq/image/upload", {
+            method: "post",
+            body: data,
+          });
+
+          const result = await res.json();
+          setPic(data.url.toString())
+          setFormData({
+            ...formData,
+            [name]: result.url.toString() // Set the URL of the uploaded image
+          });
+          setPicLoading(false);
+        } catch (err) {
+          console.error('Error uploading image:', err);
+          setPicLoading(false);
+        }
+      } else {
+        alert('Please upload a valid image file (png, jpeg, jpg).');
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -49,26 +88,26 @@ const HealthDetailsPage = () => {
     }
 
     try {
-      const response = await fetch('https://your-api-endpoint/health-details', {
-        method: 'POST',
-        body: dataToSend
+      const response = await api.post('http://localhost:8100/api/doctor/patient/record/add',{
+        formData
       });
 
-      if (!response.ok) {
+      if (response.status !== 201) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       setFormData({
-        govtId: '',
+        patientId: '',
+        patientId: '',
         date: '',
         height: '',
         weight: '',
         haemoglobin: '',
-        bloodPressure: '',
+        bp: '',
         symptoms: '',
         comments: '',
-        medicines: '',
-        scanImage: null
+        medication: '',
+        scan: null   
       });
 
       alert('Health details submitted successfully!');
@@ -85,12 +124,12 @@ const HealthDetailsPage = () => {
         <label>Govt ID <span className="required">*</span>:</label>
         <input
           type="text"
-          name="govtId"
-          value={formData.govtId}
+          name="patientId"
+          value={formData.patientId}
           onChange={handleChange}
           required
-          pattern="\d{12}"
-          title="Govt ID must be a 12-digit numeric value."
+          //pattern="\d{12}"
+          //title="Govt ID must be a 12-digit numeric value."
         />
         {errors.govtId && <p className="error">{errors.govtId}</p>}
 
@@ -133,8 +172,8 @@ const HealthDetailsPage = () => {
         <label>Blood Pressure <span className="required">*</span>:</label>
         <input
           type="text"
-          name="bloodPressure"
-          value={formData.bloodPressure}
+          name="bp"
+          value={formData.bp}
           onChange={handleChange}
           required
         />
@@ -157,8 +196,8 @@ const HealthDetailsPage = () => {
 
         <label>Medicines Recommended <span className="required">*</span>:</label>
         <textarea
-          name="medicines"
-          value={formData.medicines}
+          name="medication"
+          value={formData.medication}
           onChange={handleChange}
           required
         ></textarea>
@@ -166,9 +205,10 @@ const HealthDetailsPage = () => {
         <label>Upload Scan Image:</label>
         <input
           type="file"
-          name="scanImage"
+          name="scan"
           onChange={handleChange}
         />
+        {picLoading && <p>Loading image...</p>} {/* Show loading text while uploading */}
 
         <button type="submit">Submit</button>
       </form>

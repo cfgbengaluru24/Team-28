@@ -9,21 +9,22 @@ body {
   justify-content: center;
 }
 
+
 .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.6); /* Slightly darker for better contrast */
+  color: black;
+  background: rgba(255, 255,255); 
   padding: 20px;
-  padding-top: 40px; /* Added padding to the top */
+  padding-top: 40px; 
   border-radius: 12px;
   width: 100%;
-  max-width: 500px; /* Adjusted max-width for a better fit */
-  box-sizing: border-box; /* Ensure padding is included in width */
-  overflow: hidden; /* Hide any overflow */
+  max-width: 500px; 
+  box-sizing: border-box; 
+  overflow: hidden; 
 }
 
 .signup-logo {

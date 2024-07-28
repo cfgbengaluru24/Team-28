@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Signup.css';
 import logo from './images/logo.png'; // Ensure this path is correct
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Signup = () => {
     password: '',
     
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -24,7 +27,7 @@ const Signup = () => {
     try {
       // Make POST request to the backend
 
-      const response = await axios.post('http://localhost:8100/api/doctor/register', formData);
+      const response = await axios.post('http://localhost:8100/api/admin/register', formData);
 
       alert(response.data.message); // Alert on successful registration
       // Optionally redirect or reset form
@@ -34,6 +37,9 @@ const Signup = () => {
         password: '',
     
       });
+
+      navigate('/login_admin');
+      
     } catch (error) {
       alert('Signup failed: ' + error.response?.data?.error || error.message); // Alert on failure
     }

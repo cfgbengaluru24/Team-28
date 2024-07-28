@@ -1,39 +1,47 @@
 /* src/NavBar.css */
 
 .nav-bar {
-    background-color: #007bff;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .nav-bar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .nav-bar li {
-    margin: 0;
-  }
-  
-  .nav-bar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-  }
-  
-  .logout-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    background-color: #c82333;
-  }
-  
+  background-color: #007bff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center; /* Center text horizontally */
+}
+
+.nav-bar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex; /* Change to inline-flex to center the ul */
+  justify-content: center; /* Center items horizontally */
+  gap: 20px; /* Add a gap between list items */
+}
+
+.nav-bar li {
+  margin: 0;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block; /* Make the link a block element for better padding */
+}
+
+.nav-bar a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Lighter color box on hover */
+  border-radius: 4px; /* Rounded corners to match button style */
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}

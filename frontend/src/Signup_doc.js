@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './Signup.css';
+import './login.css';
 import logo from './images/logo.png'; // Ensure this path is correct
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 const api = axios.create({withCredentials:true})
 
 const Signup = () => {
@@ -12,6 +13,8 @@ const Signup = () => {
     contact: '',
     speciality: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,6 +38,9 @@ const Signup = () => {
         contact: '',
         speciality: ''
       });
+
+      navigate('/login_doc');
+
     } catch (error) {
       console.log(error.message);
       alert('Signup failed: ' + error.response?.data?.error || error.message); // Alert on failure

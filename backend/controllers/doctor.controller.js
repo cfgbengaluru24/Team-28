@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt"
 import Doctor from "../models/Doctor.js"
 import jwt from "jsonwebtoken"
+import Records from "../models/Records.js";
 import Patient  from "../models/Patient.js";
-import Records from "../models/Records.js"
-
 
 
 export const register = async (req,res) =>{
@@ -91,9 +90,14 @@ export const getDoctorById = async (req, res) => {
 
 export const addPatient = async (req,res) => {
     try{
-        const { name, govtId, DoB, gender, blood_group, location, contact } = req.body;
+        
+        const { name, govtId, DoB, gender, blood_group, location, contact } = req.body.formData;
+        console.log( name, govtId, DoB, gender, blood_group, location, contact)
+        
+        // DoB = new Date(DoB);
+        // console.log(DoB)
         const id = req.decoded;
-        console.log(id)
+        // contact =  contact ? contact : ""
         const patient = await Patient.findOne({govtId:govtId});
         if (patient){
             throw new Error("Patient already exists");
@@ -107,12 +111,13 @@ export const addPatient = async (req,res) => {
             gender,
             blood_group,
             location,
-            contact
+            contact,
         });
-
+        
         // Save the patient and create a corresponding record
-        const savedPatient = await newPatient.save();
-
+        await newPatient.save();
+        console.log(id)
+        
         const doctor = await Doctor.findById(id);
         if (!doctor) {
             res.status(500).json({message: "Doctor Not Found!"});
@@ -129,13 +134,13 @@ export const addPatient = async (req,res) => {
 
 export const findPatientByGovtId = async (req, res) => {
     try {
-        const patient = await Patient.findOne({ govtId: req.body.govtId });
+        const patient = await Patient.findOne({ govtId: req.query.govtId  });
         if (!patient) {
             return res.status(404).json({ message: 'Patient not found' });
         }
         res.status(200).json({
             name: patient.name,
-            dob: patient.dob,
+            dob: patient.DoB,
             gender: patient.gender,
             blood:patient.blood,
             location:patient.location,
@@ -148,13 +153,14 @@ export const findPatientByGovtId = async (req, res) => {
 
 export const findPatientByName = async (req, res) => {
     try {
-        const patients = await Patient.find({ name: req.body.name });
-        if (patients.length === 0) {
+        const patient = await Patient.findOne({ name: req.query.name });
+        console.log("Hi")
+        if (!patient) {
             return res.status(404).json({ message: 'No patients found' });
         }
         res.status(200).json({
             name: patient.name,
-            dob: patient.dob,
+            dob: patient.DoB,
             gender: patient.gender,
             blood:patient.blood,
             location:patient.location,
@@ -167,13 +173,14 @@ export const findPatientByName = async (req, res) => {
 
 export const findPatientByLocation = async (req, res) => {
     try {
-        const patients = await Patient.find({ location: req.body.location });
-        if (patients.length === 0) {
+        const patient = await Patient.findOne({ location: req.query.location });
+        if (patient.length === 0) {
             return res.status(404).json({ message: 'No patients found' });
         }
+        console.log(patient)
         res.status(200).json({
             name: patient.name,
-            dob: patient.dob,
+            dob: patient.DoB,
             gender: patient.gender,
             blood:patient.blood,
             location:patient.location,
@@ -186,6 +193,7 @@ export const findPatientByLocation = async (req, res) => {
 
 
 export const addRecord = async (req,res) => {
+    console.log(req.body);
     const {
         date,
         patientId,
@@ -197,8 +205,9 @@ export const addRecord = async (req,res) => {
         weight,
         height,
         bp
-    } = req.body;
+    } = req.body.formData;
     const docId = req.decoded;
+    console.log(docId);
 
     try {
         const newRecord = new Records({

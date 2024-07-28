@@ -20,7 +20,7 @@ const PatientSchema = mongoose.Schema({
     },
     gender: {
         type:String,
-        enum:['Male',"Female"],
+        enum:["Male","Female"],
         required:true,
     },
     blood_group:{
@@ -31,7 +31,7 @@ const PatientSchema = mongoose.Schema({
 
     },
     contact:{
-        type:Number
+        type:String
     },
     records:[{
         type: mongoose.Schema.Types.ObjectId,
