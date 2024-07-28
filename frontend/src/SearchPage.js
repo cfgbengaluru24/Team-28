@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './SearchPage.css';
+
+const api = axios.create({ withCredentials: true });
 
 function SearchPage() {
   const [filter, setFilter] = useState('name');
@@ -9,18 +12,15 @@ function SearchPage() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://localhost:8100/api/doctor/findPatientBy${filter.charAt(0).toUpperCase() + filter.slice(1)}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ [filter]: query }),
+      const response = await api.get(`http://localhost:8100/api/doctor/patient/${filter}`, {
+        params: { [filter]: query }
       });
-      if (!response.ok) {
+      
+      if (response.status !== 200) {
         throw new Error(`Error: ${response.statusText}`);
       }
-      const data = await response.json();
-      setPatientDetails(data);
+      console.log(response.data)
+      setPatientDetails(response.data);
       setError(''); // Clear error
     } catch (err) {
       setError(err.message);
